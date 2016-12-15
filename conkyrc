@@ -1,0 +1,135 @@
+
+# Main configuration section (see http://conky.sourceforge.net/config_settings.html for more information)
+
+# Window Settings
+background yes
+own_window yes
+#own_window_type panel
+own_window_transparent no
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+alignment bottom_right
+#minimum_width 500
+maximum_width 400
+
+update_interval 1.0
+#total_run_times 0
+cpu_avg_samples 2
+net_avg_samples 2
+
+# Style
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders yes
+default_color white
+default_shade_color red
+default_outline_color red
+show_graph_scale yes
+default_graph_size 400 80
+default_bar_size 150 8
+use_xft yes
+#font Monospace:size=14
+xftalpha 0.1
+uppercase no
+#max_text_width 20 
+#max_user_width 20 
+use_spacer left
+
+color0 00c4d0 # Header color
+color1 009b62 # label text color
+color2 009b62 # variable text color
+color3 009b62 # Begin graph color
+color4 9b0016 # end graph color
+
+TEXT
+${color0} ${font Monospace:bold:size=14}SYSTEM ${voffset 2}${hr 2}
+#
+${color1}${offset 10}${font Monospace:bold:size=11}Hostname: $alignr${color2}${font Monospace:size=11}$nodename
+#
+${color1}${offset 10}${font Monospace:bold:size=11}Kernel: $alignr${color2}${font Monospace:size=11}$kernel
+${color1}${offset 10}${font Monospace:bold:size=11}Uptime: $alignr${color2}${font Monospace:size=11}$uptime
+${color1}${offset 10}${font Monospace:bold:size=11}IP Address: $alignr${color2}${font Monospace:size=11}${addr eno1} 
+${color1}${offset 10}${font Monospace:bold:size=11}Gateway: $alignr${color2}${font Monospace:size=10}$gw_ip
+${color1}${offset 10}${font Monospace:bold:size=11}Name Servers: $alignr${color2}${font Monospace:size=10}${nameserver 0}
+$alignr${color2}${font Monospace:size=11}${nameserver 1}
+$alignr${color2}${font Monospace:size=11}${nameserver 2}
+
+${color0}${font Monospace:bold:size=14}PROCESSORS ${voffset 2}${hr 2}
+${color1}${offset 10}${cpugraph 64,380 009b62 9b0016 -t}
+${offset 10}CPUs
+${color1}${offset 10}${cpubar cpu1 10,150}${color2}${font Monospace:size=11}${offset 20}${cpu cpu1} %${offset 25}${freq_g 1} Ghz${offset 15}${execi 1 ~/.conky/scripts/cputemp.sh "Core 0"}
+${color1}${offset 10}${cpubar cpu2 10,150}${color2}${font Monospace:size=11}${offset 20}$alignc${cpu cpu2} %${offset 25}${freq_g 2} Ghz${offset 15}${execi 1 ~/.conky/scripts/cputemp.sh "Core 1"}
+${color1}${offset 10}${cpubar cpu3 10,150}${color2}${font Monospace:size=11}${offset 20}$alignc${cpu cpu3} %${offset 25}${freq_g 3} Ghz${offset 15}${execi 1 ~/.conky/scripts/cputemp.sh "Core 2"}
+${color1}${offset 10}${cpubar cpu4 10,150}${color2}${font Monospace:size=11}${offset 20}$alignc${cpu cpu4} %${offset 25}${freq_g 4} Ghz${offset 15}${execi 1 ~/.conky/scripts/cputemp.sh "Core 3"}
+${color1}${offset 10}${cpubar cpu5 10,150}${color2}${font Monospace:size=11}${offset 20}$alignc${cpu cpu5} %${offset 25}${freq_g 5} Ghz${offset 15}${execi 1 ~/.conky/scripts/cputemp.sh "Core 4"}
+${color1}${offset 10}${cpubar cpu6 10,150}${color2}${font Monospace:size=11}${offset 20}$alignc${cpu cpu6} %${offset 25}${freq_g 6} Ghz${offset 15}${execi 1 ~/.conky/scripts/cputemp.sh "Core 5"}
+${color1}${offset 10}${font Monospace:bold:size=14}GPUs
+${color1}${offset 10}${color2}${execbar ~/.conky/scripts/nvidia-smi.sh utilization.gpu 0}${font Monospace:size=11}${offset 25}${execi 1 /home/paulus/.conky/scripts/nvidia-smi.sh utilization.gpu 0}${offset 25}${execi 1 ~/.conky/scripts/nvidia-smi.sh clocks.gr 0}${offset 15}${execi 1 ~/.conky/scripts/nvidia-smi.sh temperature.gpu 0}.0°C
+${color1}${offset 10}${execbar ~/.conky/scripts/nvidia-smi.sh utilization.gpu 1}${font Monospace:size=11}${offset 25}${execi 1 ~/.conky/scripts/nvidia-smi.sh utilization.gpu 1}${offset 25}${execi 1 ~/.conky/scripts/nvidia-smi.sh clocks.gr 1} ${execi 1 ~/.conky/scripts/nvidia-smi.sh temperature.gpu 1}.0°C
+
+${color1}${offset 10}Name                PID    CPU%    MEM%
+${color1}${offset 10}${top name 1}    ${top pid 1} ${top cpu 1} ${top mem 1} 
+${color1}${offset 10}${top name 2}    ${top pid 2} ${top cpu 2} ${top mem 2}
+${color1}${offset 10}${top name 3}    ${top pid 3} ${top cpu 3} ${top mem 3}
+
+${color0} ${font Monospace:bold:size=14}MEMORY ${voffset 2}${hr 2}
+${color1}${offset 10}${font Monospace:bold:size=11}RAM $alignc${color2}${font Monospace:size=11}$mem / $memmax $memperc%
+${color1}${offset 10}${membar 10, 380}
+${color1}${offset 10}${font Monospace:bold:size=11}SWAP $alignc${color2}${font Monospace:size=11}$swap / $swapmax $swapperc%
+${color1}${offset 10}${swapbar 10, 380}
+
+${color1}${offset 10}Mem usage
+${color1}${offset 10}${top_mem name 1} ${top_mem mem 1} ${top_mem mem_res 1} ${top_mem mem_vsize 1}   
+${color1}${offset 10}${top_mem name 2} ${top_mem mem 2} ${top_mem mem_res 2} ${top_mem mem_vsize 2}   
+${color1}${offset 10}${top_mem name 3} ${top_mem mem 3} ${top_mem mem_res 3} ${top_mem mem_vsize 3}
+
+${color0} ${font Monospace:bold:size=14}STORAGE ${voffset 2}${hr 2}
+${offset 10}$color1${diskiograph 64,380 /dev/md2 009b62 9b0016 -t}
+${offset 10}$color1${font Monospace:bold:size=12}/ $alignc${color2}${font Monospace:size=12}${fs_used /} /${fs_size /} $alignr${fs_free_perc /}% 
+${color1}${offset 10}${fs_bar 10, 380 /}
+${offset 10}${diskiograph 64,380 /dev/md127 009b62 9b0016 -t}
+${offset 10}$color1${font Monospace:bold:size=12}/home $alignc${color2}${font Monospace:size=12}${fs_used /home} / ${fs_size /home} $alignr${fs_free_perc /home}% 
+${color1}${offset 10}${fs_bar 10,380 /home}
+
+${color1}${offset 10}Device ${offset 110}Temp${offset 90}I/O
+${color1}${offset 10}/dev/sda ${offset 80}${alignc}${font Monospace:size=12}${hddtemp /dev/sda} C${offset 70}${diskio /dev/sda}
+${color1}${offset 10}/dev/sdb ${offset 80}${alignc}${font Monospace:size=12}${alignc}${hddtemp /dev/sdb} C${offset 70}${diskio /dev/sdb}
+${color1}${offset 10}/dev/sdc ${offset 80}${alignc}${font Monospace:size=12}${alignc}${hddtemp /dev/sdc} C${offset 70}${diskio /dev/sdc}
+${color1}${offset 10}/dev/sdd ${offset 80}${alignc}${font Monospace:size=12}${alignc}${hddtemp /dev/sdd} C${offset 70}${diskio /dev/sdd}
+${color1}${offset 10}/dev/sde ${offset 80}${alignc}${font Monospace:size=12}${alignc}${hddtemp /dev/sde} C${offset 70}${diskio /dev/sde}
+${color1}${offset 10}/dev/sdf ${offset 80}${alignc}${font Monospace:size=12}${alignc}${hddtemp /dev/sdf} C${offset 70}${diskio /dev/sdf}
+${color1}${offset 10}/dev/sdg ${offset 80}${alignc}${font Monospace:size=12}${alignc}${hddtemp /dev/sdg} C${offset 70}${diskio /dev/sdg}
+#${color1}${offset 10}/dev/sdf ${offset 80}${alignc}${font Monospace:size=12}${alignc}${hddtemp /dev/sdf} C${offset 70}${diskio /dev/sdf}
+
+${color1}${offset 10}IO${offset 230}      I/O%
+${color1}${offset 10}${top_io name 1}${offset 130}${top_io io_perc 1}
+${color1}${offset 10}${top_io name 2}${offset 130}${top_io io_perc 2}
+${color1}${offset 10}${top_io name 3}${offset 130}${top_io io_perc 3}
+   
+${color0}${font Monospace:bold:size=14}NETWORK ${voffset 2}${hr 2}
+	
+#${alignr}${color #5b6dad}TCP Connections: ${color #7f8ed3}
+${color1}${offset 10}${downspeedgraph eno1 64,185 009b62 9b0016 -t} ${upspeedgraph eno1 65,185 009b62 9b0016 -t}
+${color1}${offset 40}↑${upspeed eno1} k/s${offset 20}${offset 45}↓${downspeed eno1} k/s
+${color1}${offset 10}${font Monospace:size=11}Remote IP${alignr}Remote Host
+${color2}${offset 10}${tcp_portmon 1 65535 rip 0}$alignr${tcp_portmon 1 65535 rhost 0}
+${color2}${offset 10}${tcp_portmon 1 65535 rip 1}$alignr${tcp_portmon 1 65535 rhost 1}
+${color2}${offset 10}${tcp_portmon 1 65535 rip 2}$alignr${tcp_portmon 1 65535 rhost 2}
+${color2}${offset 10}${tcp_portmon 1 65535 rip 3}$alignr${tcp_portmon 1 65535 rhost 3}
+${color2}${offset 10}${tcp_portmon 1 65535 rip 4}$alignr${tcp_portmon 1 65535 rhost 4}
+#
+#${color #000000}${downspeedgraph eno1 32,150 000000 7f8ed3} ${color #000000}${upspeedgraph eno1 32,150 000000 7f8ed3}
+# 
+# 
+#${color0} ${font Monospace:bold:size=14}HEALTH ${voffset 2}${hr 2}
+#${color1}${font Monospace:size=11}${execi 1 ~/.conky/scripts/nvidia.sh}
+#${color1}${font Monospace:size=11}${execi 1 ~/.conky/scripts/cputemp.sh}
+
+${color0} ${font Monospace:bold:size=14}PORTAGE ${voffset 2}${hr 2}
+${color1}${offset 10}${font Monospace:bold:size=12}Current Progress ${color2}${font Monospace:size=12}${execibar 3 /home/paulus/.conky/scripts/emerge-progress.sh}
+${color1}${offset 10}${font Monospace:bold:size=12}Current Package  ${color2}${font Monospace:size=12}${execi 3 /home/paulus/.conky/scripts/emerge-current.sh}
+${color1}${offset 10}${font Monospace:bold:size=12}Current Status   ${color2}${font Monospace:size=12}${execi 3 /home/paulus/.conky/scripts/emerge-status.sh}
+
+
+
+#nameserver
