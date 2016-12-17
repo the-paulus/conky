@@ -20,4 +20,4 @@ $ mkdir ~/.conky
 $ mv conky-paulus/scripts ~/.conky
 ```
 
-[![screenshot]((https://github.com/the-paulus/conky/raw/master/screenshot-thumbnail.png)](https://github.com/the-paulus/conky/raw/master/screenshot.png)
+[![screenshot](https://github.com/the-paulus/conky/raw/master/screenshot-thumbnail.png)](https://github.com/the-paulus/conky/raw/master/screenshot.png)
